@@ -7,9 +7,13 @@ import (
 	"net/http"
 )
 
-func (c *Client) ListLocationAreas() (LocationAreasResponse, error) {
+func (c *Client) ListLocationAreas(pageUrl *string) (LocationAreasResponse, error) {
 	endpoint := "/location-area"
 	fullUrl := baseUrl + endpoint
+
+	if pageUrl != nil {
+		fullUrl = *pageUrl
+	}
 
 	req, err := http.NewRequest("GET", fullUrl, nil)
 	if err != nil {
@@ -22,7 +26,7 @@ func (c *Client) ListLocationAreas() (LocationAreasResponse, error) {
 	defer res.Body.Close()
 
 	if res.StatusCode > 399 {
-		return LocationAreasResponse{}, fmt.Errorf("Bad status code : %v", res.StatusCode)
+		return LocationAreasResponse{}, fmt.Errorf("bad status code : %v", res.StatusCode)
 	}
 
 	data, err := io.ReadAll(res.Body)

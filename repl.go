@@ -10,7 +10,7 @@ import (
 type cliCommand struct {
 	name        string
 	description string
-	callback    func() error
+	callback    func(*config) error
 }
 
 var commands = map[string]cliCommand{
@@ -41,14 +41,17 @@ var commands = map[string]cliCommand{
 	},
 }
 
-func startRepl() {
+func startRepl(cfg *config) {
 	reader := bufio.NewScanner(os.Stdin)
 	printPrompt()
 
 	for reader.Scan() {
 		text := cleanInput(reader.Text())
 		if command, exists := commands[text]; exists {
-			command.callback()
+			err := command.callback(cfg)
+			if err != nil {
+				fmt.Println(err)
+			}
 		} else if strings.EqualFold("exit", text) {
 			return
 		} else {
