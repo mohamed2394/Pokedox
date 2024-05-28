@@ -3,8 +3,7 @@ package main
 import "pokedox/internal/pokeapi"
 
 type config struct {
-	pokeapiClient pokeapi.Client
-
+	pokeapiClient           pokeapi.Client
 	nextLocationAreaUrl     *string
 	previousLocationAreaUrl *string
 }
