@@ -1,16 +1,13 @@
 package main
 
-import "pokedox/internal/pokeapi"
-
-type config struct {
-	pokeapiClient           pokeapi.Client
-	nextLocationAreaUrl     *string
-	previousLocationAreaUrl *string
-}
+import (
+	"pokedox/config"
+	"pokedox/internal/pokeapi"
+)
 
 func main() {
-	cfg := config{
-		pokeapiClient: pokeapi.NewClient(),
+	cfg := config.Config{
+		PokeapiClient: pokeapi.NewClient(),
 	}
 
 	startRepl(&cfg)

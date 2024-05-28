@@ -4,50 +4,52 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"pokedox/commands"
+	"pokedox/config"
 	"strings"
 )
 
 type cliCommand struct {
 	name        string
 	description string
-	callback    func(*config) error
+	callback    func(*config.Config) error
 }
 
-var commands = map[string]cliCommand{
+var commands_e = map[string]cliCommand{
 	"help": {
 		name:        "help",
 		description: "Displays a help message",
-		callback:    commandHelp,
+		callback:    commands.CommandExit,
 	},
 	"exit": {
 		name:        "exit",
 		description: "Exit the Pokedex",
-		callback:    commandExit,
+		callback:    commands.CommandExit,
 	},
 	"clear": {
 		name:        "clear",
 		description: "Clears the Terminal",
-		callback:    clearScreen,
+		callback:    commands.ClearScreen,
 	},
 	"map": {
 		name:        "map",
 		description: "displays the names of 20 location areas in the Pokemon world",
-		callback:    commandMap,
+		callback:    commands.CommandMap,
 	},
 	"mapb": {
 		name:        "mapb",
 		description: "displays the previous 20 locations in the Pokemon world",
-		callback:    commandMapB,
+		callback:    commands.CommandMapB,
 	},
 }
 
-func startRepl(cfg *config) {
+func startRepl(cfg *config.Config) {
 	reader := bufio.NewScanner(os.Stdin)
 	printPrompt()
 
 	for reader.Scan() {
 		text := cleanInput(reader.Text())
-		if command, exists := commands[text]; exists {
+		if command, exists := commands_e[text]; exists {
 			err := command.callback(cfg)
 			if err != nil {
 				fmt.Println(err)

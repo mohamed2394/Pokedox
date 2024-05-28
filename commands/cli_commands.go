@@ -4,20 +4,22 @@ import (
 	"fmt"
 	"os"
 
+	"pokedox/config"
+
 	"github.com/inancgumus/screen"
 )
 
-func clearScreen(cfg config) error {
+func ClearScreen(cfg *config.Config) error {
 	screen.Clear()
 	screen.MoveTopLeft()
 	return nil
 }
-func commandExit(cfg Config) error {
+func CommandExit(cfg *config.Config) error {
 	os.Exit(1)
 	return nil
 }
 
-func commandHelp(cfg Config) error {
+func CommandHelp(cfg *config.Config) error {
 	fmt.Printf(
 		"Welcome! These are the available commands:")
 	fmt.Println("help    - Show available commands")

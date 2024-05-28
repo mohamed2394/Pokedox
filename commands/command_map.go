@@ -3,11 +3,12 @@ package commands
 import (
 	"fmt"
 	"log"
+	"pokedox/config"
 )
 
-func commandMap(cfg config) error {
+func CommandMap(cfg *config.Config) error {
 
-	resp, err := cfg.pokeapiClient.ListLocationAreas(cfg.nextLocationAreaUrl)
+	resp, err := cfg.PokeapiClient.ListLocationAreas(cfg.NextLocationAreaUrl)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -16,18 +17,18 @@ func commandMap(cfg config) error {
 	for _, area := range resp.Results {
 		fmt.Printf(" - %s\n", area.Name)
 	}
-	cfg.nextLocationAreaUrl = resp.Next
-	cfg.previousLocationAreaUrl = resp.Previous
+	cfg.NextLocationAreaUrl = resp.Next
+	cfg.PreviousLocationAreaUrl = resp.Previous
 
 	return nil
 }
 
-func commandMapB(cfg *config) error {
-	if cfg.previousLocationAreaUrl == nil {
+func CommandMapB(cfg *config.Config) error {
+	if cfg.PreviousLocationAreaUrl == nil {
 		return fmt.Errorf("you are in the first  ")
 	}
 
-	resp, err := cfg.pokeapiClient.ListLocationAreas(cfg.previousLocationAreaUrl)
+	resp, err := cfg.PokeapiClient.ListLocationAreas(cfg.PreviousLocationAreaUrl)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -36,8 +37,8 @@ func commandMapB(cfg *config) error {
 	for _, area := range resp.Results {
 		fmt.Printf(" - %s\n", area.Name)
 	}
-	cfg.nextLocationAreaUrl = resp.Next
-	cfg.previousLocationAreaUrl = resp.Previous
+	cfg.NextLocationAreaUrl = resp.Next
+	cfg.PreviousLocationAreaUrl = resp.Previous
 
 	return nil
 }
