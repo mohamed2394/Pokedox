@@ -12,14 +12,14 @@ import (
 type cliCommand struct {
 	name        string
 	description string
-	callback    func(*config.Config) error
+	callback    func(cfg *config.Config) error
 }
 
 var commands_e = map[string]cliCommand{
 	"help": {
 		name:        "help",
 		description: "Displays a help message",
-		callback:    commands.CommandExit,
+		callback:    commands.CommandHelp,
 	},
 	"exit": {
 		name:        "exit",

@@ -3,12 +3,15 @@ package main
 import (
 	"pokedox/config"
 	"pokedox/internal/pokeapi"
+	"time"
 )
 
 func main() {
-	cfg := config.Config{
-		PokeapiClient: pokeapi.NewClient(),
+	pokeClient := pokeapi.NewClient(5*time.Second, time.Minute*5)
+
+	cfg := &config.Config{
+		PokeapiClient: pokeClient,
 	}
 
-	startRepl(&cfg)
+	startRepl(cfg)
 }

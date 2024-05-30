@@ -7,13 +7,12 @@ import (
 )
 
 func CommandMap(cfg *config.Config) error {
-
 	resp, err := cfg.PokeapiClient.ListLocationAreas(cfg.NextLocationAreaUrl)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	fmt.Println("Locartion Areas :")
+	fmt.Println("Location Areas:")
 	for _, area := range resp.Results {
 		fmt.Printf(" - %s\n", area.Name)
 	}
@@ -25,7 +24,7 @@ func CommandMap(cfg *config.Config) error {
 
 func CommandMapB(cfg *config.Config) error {
 	if cfg.PreviousLocationAreaUrl == nil {
-		return fmt.Errorf("you are in the first  ")
+		return fmt.Errorf("you are in the first instance, no previous location areas")
 	}
 
 	resp, err := cfg.PokeapiClient.ListLocationAreas(cfg.PreviousLocationAreaUrl)
@@ -33,12 +32,11 @@ func CommandMapB(cfg *config.Config) error {
 		log.Fatal(err)
 	}
 
-	fmt.Println("Locartion Areas :")
+	fmt.Println("Location Areas:")
 	for _, area := range resp.Results {
 		fmt.Printf(" - %s\n", area.Name)
 	}
 	cfg.NextLocationAreaUrl = resp.Next
 	cfg.PreviousLocationAreaUrl = resp.Previous
-
 	return nil
 }
