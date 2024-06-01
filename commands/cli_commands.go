@@ -9,17 +9,17 @@ import (
 	"github.com/inancgumus/screen"
 )
 
-func ClearScreen(cfg *config.Config) error {
+func ClearScreen(cfg *config.Config, parameter ...string) error {
 	screen.Clear()
 	screen.MoveTopLeft()
 	return nil
 }
-func CommandExit(cfg *config.Config) error {
+func CommandExit(cfg *config.Config, parameter ...string) error {
 	os.Exit(1)
 	return nil
 }
 
-func CommandHelp(cfg *config.Config) error {
+func CommandHelp(cfg *config.Config, parameter ...string) error {
 	fmt.Printf(
 		"Welcome! These are the available commands:")
 	fmt.Println("help    - Show available commands")

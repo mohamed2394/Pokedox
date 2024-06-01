@@ -12,7 +12,7 @@ import (
 type cliCommand struct {
 	name        string
 	description string
-	callback    func(cfg *config.Config) error
+	callback    func(cfg *config.Config, parameter ...string) error
 }
 
 var commands_e = map[string]cliCommand{
@@ -31,6 +31,12 @@ var commands_e = map[string]cliCommand{
 		description: "Clears the Terminal",
 		callback:    commands.ClearScreen,
 	},
+	"explore": {
+		name:        "explore",
+		description: "displays the names of 20 location areas in the Pokemon world",
+		callback:    commands.CommandExplore,
+	},
+
 	"map": {
 		name:        "map",
 		description: "displays the names of 20 location areas in the Pokemon world",
@@ -48,16 +54,25 @@ func startRepl(cfg *config.Config) {
 	printPrompt()
 
 	for reader.Scan() {
-		text := cleanInput(reader.Text())
-		if command, exists := commands_e[text]; exists {
-			err := command.callback(cfg)
+		text := reader.Text()
+		prompt := strings.Fields(text)
+		if len(prompt) == 0 {
+			printPrompt()
+			continue
+		}
+
+		commandName := prompt[0]
+		parameters := prompt[1:]
+
+		if command, exists := commands_e[commandName]; exists {
+			err := command.callback(cfg, parameters...)
 			if err != nil {
-				fmt.Println(err)
+				fmt.Println("Error:", err)
 			}
-		} else if strings.EqualFold("exit", text) {
+		} else if strings.EqualFold("exit", commandName) {
 			return
 		} else {
-			handleCmd(text)
+			fmt.Println("Unknown command:", commandName)
 		}
 		printPrompt()
 	}

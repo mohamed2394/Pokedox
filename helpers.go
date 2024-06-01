@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strings"
 )
 
 func printPrompt() {
@@ -18,9 +17,4 @@ func handleInvalidCmd(text string) {
 
 func handleCmd(text string) {
 	handleInvalidCmd(text)
-}
-func cleanInput(text string) string {
-	output := strings.TrimSpace(text)
-	output = strings.ToLower(output)
-	return output
 }
