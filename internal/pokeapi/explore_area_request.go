@@ -11,6 +11,16 @@ func (c *Client) ListAreaPokemones(areaName string) (ExplorePokemonesResponse, e
 	// Ensure the URL is correctly constructed
 	fullUrl := fmt.Sprintf("%s/location-area/%s", baseUrl, areaName)
 
+	if val, ok := c.cache.Get(fullUrl); ok {
+		exploreResponse := ExplorePokemonesResponse{}
+		err := json.Unmarshal(val, &exploreResponse)
+		if err != nil {
+			return ExplorePokemonesResponse{}, err
+		}
+
+		return exploreResponse, nil
+	}
+
 	req, err := http.NewRequest("GET", fullUrl, nil)
 	if err != nil {
 		return ExplorePokemonesResponse{}, err

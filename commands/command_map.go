@@ -42,21 +42,18 @@ func CommandMapB(cfg *config.Config, parameter ...string) error {
 }
 
 func CommandExplore(cfg *config.Config, parameters ...string) error {
-	// Check if exactly one parameter is provided
 	if len(parameters) != 1 {
 		return fmt.Errorf("explore command requires exactly one parameter")
 	}
 
-	// Extract the single parameter
 	area := parameters[0]
 
-	// Call the ListAreaPokemones function with the parameter
 	resp, err := cfg.PokeapiClient.ListAreaPokemones(area)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	fmt.Println("Exploring pastoria-city-area....")
+	fmt.Printf("Exploring %s....\n", resp.Name)
 	if len(resp.PokemonEncounters) != 0 {
 		fmt.Println("Found Pokemones :")
 		for _, encounter := range resp.PokemonEncounters {
