@@ -7,33 +7,33 @@ import (
 	"net/http"
 )
 
-func (c *Client) CatchPokemone(pokemoneName string) (CatchPokemoenResponse, error) {
+func (c *Client) CatchPokemone(pokemoneName string) (Pokemon, error) {
 	// Ensure the URL is correctly constructed
 	fullUrl := fmt.Sprintf("%s/pokemon/%s", baseUrl, pokemoneName)
 
 	req, err := http.NewRequest("GET", fullUrl, nil)
 	if err != nil {
-		return CatchPokemoenResponse{}, err
+		return Pokemon{}, err
 	}
 	res, err := c.httpClient.Do(req)
 	if err != nil {
-		return CatchPokemoenResponse{}, err
+		return Pokemon{}, err
 	}
 	defer res.Body.Close()
 
 	if res.StatusCode > 399 {
-		return CatchPokemoenResponse{}, fmt.Errorf("bad status code: %v", res.StatusCode)
+		return Pokemon{}, fmt.Errorf("bad status code: %v", res.StatusCode)
 	}
 
 	data, err := io.ReadAll(res.Body)
 	if err != nil {
-		return CatchPokemoenResponse{}, err
+		return Pokemon{}, err
 	}
 
-	catchResponse := CatchPokemoenResponse{}
+	catchResponse := Pokemon{}
 	err = json.Unmarshal(data, &catchResponse)
 	if err != nil {
-		return CatchPokemoenResponse{}, err
+		return Pokemon{}, err
 	}
 
 	return catchResponse, nil

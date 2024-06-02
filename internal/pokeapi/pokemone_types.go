@@ -1,260 +1,246 @@
 package pokeapi
 
-type CatchPokemoenResponse struct {
+// Pokemon -
+type Pokemon struct {
 	Abilities []struct {
 		Ability struct {
-			Name string `json:"name,omitempty"`
-			URL  string `json:"url,omitempty"`
-		} `json:"ability,omitempty"`
-		IsHidden bool `json:"is_hidden,omitempty"`
-		Slot     int  `json:"slot,omitempty"`
-	} `json:"abilities,omitempty"`
-	BaseExperience int `json:"base_experience,omitempty"`
-	Cries          struct {
-		Latest string `json:"latest,omitempty"`
-		Legacy string `json:"legacy,omitempty"`
-	} `json:"cries,omitempty"`
-	Forms []struct {
-		Name string `json:"name,omitempty"`
-		URL  string `json:"url,omitempty"`
-	} `json:"forms,omitempty"`
+			Name string `json:"name"`
+			URL  string `json:"url"`
+		} `json:"ability"`
+		IsHidden bool `json:"is_hidden"`
+		Slot     int  `json:"slot"`
+	} `json:"abilities"`
+	BaseExperience int `json:"base_experience"`
+	Forms          []struct {
+		Name string `json:"name"`
+		URL  string `json:"url"`
+	} `json:"forms"`
 	GameIndices []struct {
-		GameIndex int `json:"game_index,omitempty"`
+		GameIndex int `json:"game_index"`
 		Version   struct {
-			Name string `json:"name,omitempty"`
-			URL  string `json:"url,omitempty"`
-		} `json:"version,omitempty"`
-	} `json:"game_indices,omitempty"`
-	Height                 int    `json:"height,omitempty"`
-	HeldItems              []any  `json:"held_items,omitempty"`
-	ID                     int    `json:"id,omitempty"`
-	IsDefault              bool   `json:"is_default,omitempty"`
-	LocationAreaEncounters string `json:"location_area_encounters,omitempty"`
+			Name string `json:"name"`
+			URL  string `json:"url"`
+		} `json:"version"`
+	} `json:"game_indices"`
+	Height                 int           `json:"height"`
+	HeldItems              []interface{} `json:"held_items"`
+	ID                     int           `json:"id"`
+	IsDefault              bool          `json:"is_default"`
+	LocationAreaEncounters string        `json:"location_area_encounters"`
 	Moves                  []struct {
 		Move struct {
-			Name string `json:"name,omitempty"`
-			URL  string `json:"url,omitempty"`
-		} `json:"move,omitempty"`
+			Name string `json:"name"`
+			URL  string `json:"url"`
+		} `json:"move"`
 		VersionGroupDetails []struct {
-			LevelLearnedAt  int `json:"level_learned_at,omitempty"`
+			LevelLearnedAt  int `json:"level_learned_at"`
 			MoveLearnMethod struct {
-				Name string `json:"name,omitempty"`
-				URL  string `json:"url,omitempty"`
-			} `json:"move_learn_method,omitempty"`
+				Name string `json:"name"`
+				URL  string `json:"url"`
+			} `json:"move_learn_method"`
 			VersionGroup struct {
-				Name string `json:"name,omitempty"`
-				URL  string `json:"url,omitempty"`
-			} `json:"version_group,omitempty"`
-		} `json:"version_group_details,omitempty"`
-	} `json:"moves,omitempty"`
-	Name          string `json:"name,omitempty"`
-	Order         int    `json:"order,omitempty"`
-	PastAbilities []any  `json:"past_abilities,omitempty"`
-	PastTypes     []any  `json:"past_types,omitempty"`
-	Species       struct {
-		Name string `json:"name,omitempty"`
-		URL  string `json:"url,omitempty"`
-	} `json:"species,omitempty"`
+				Name string `json:"name"`
+				URL  string `json:"url"`
+			} `json:"version_group"`
+		} `json:"version_group_details"`
+	} `json:"moves"`
+	Name      string        `json:"name"`
+	Order     int           `json:"order"`
+	PastTypes []interface{} `json:"past_types"`
+	Species   struct {
+		Name string `json:"name"`
+		URL  string `json:"url"`
+	} `json:"species"`
 	Sprites struct {
-		BackDefault      string `json:"back_default,omitempty"`
-		BackFemale       any    `json:"back_female,omitempty"`
-		BackShiny        string `json:"back_shiny,omitempty"`
-		BackShinyFemale  any    `json:"back_shiny_female,omitempty"`
-		FrontDefault     string `json:"front_default,omitempty"`
-		FrontFemale      any    `json:"front_female,omitempty"`
-		FrontShiny       string `json:"front_shiny,omitempty"`
-		FrontShinyFemale any    `json:"front_shiny_female,omitempty"`
+		BackDefault      string      `json:"back_default"`
+		BackFemale       interface{} `json:"back_female"`
+		BackShiny        string      `json:"back_shiny"`
+		BackShinyFemale  interface{} `json:"back_shiny_female"`
+		FrontDefault     string      `json:"front_default"`
+		FrontFemale      interface{} `json:"front_female"`
+		FrontShiny       string      `json:"front_shiny"`
+		FrontShinyFemale interface{} `json:"front_shiny_female"`
 		Other            struct {
 			DreamWorld struct {
-				FrontDefault string `json:"front_default,omitempty"`
-				FrontFemale  any    `json:"front_female,omitempty"`
-			} `json:"dream_world,omitempty"`
+				FrontDefault string      `json:"front_default"`
+				FrontFemale  interface{} `json:"front_female"`
+			} `json:"dream_world"`
 			Home struct {
-				FrontDefault     string `json:"front_default,omitempty"`
-				FrontFemale      any    `json:"front_female,omitempty"`
-				FrontShiny       string `json:"front_shiny,omitempty"`
-				FrontShinyFemale any    `json:"front_shiny_female,omitempty"`
-			} `json:"home,omitempty"`
+				FrontDefault     string      `json:"front_default"`
+				FrontFemale      interface{} `json:"front_female"`
+				FrontShiny       string      `json:"front_shiny"`
+				FrontShinyFemale interface{} `json:"front_shiny_female"`
+			} `json:"home"`
 			OfficialArtwork struct {
-				FrontDefault string `json:"front_default,omitempty"`
-				FrontShiny   string `json:"front_shiny,omitempty"`
-			} `json:"official-artwork,omitempty"`
-			Showdown struct {
-				BackDefault      string `json:"back_default,omitempty"`
-				BackFemale       any    `json:"back_female,omitempty"`
-				BackShiny        string `json:"back_shiny,omitempty"`
-				BackShinyFemale  any    `json:"back_shiny_female,omitempty"`
-				FrontDefault     string `json:"front_default,omitempty"`
-				FrontFemale      any    `json:"front_female,omitempty"`
-				FrontShiny       string `json:"front_shiny,omitempty"`
-				FrontShinyFemale any    `json:"front_shiny_female,omitempty"`
-			} `json:"showdown,omitempty"`
-		} `json:"other,omitempty"`
+				FrontDefault string `json:"front_default"`
+				FrontShiny   string `json:"front_shiny"`
+			} `json:"official-artwork"`
+		} `json:"other"`
 		Versions struct {
 			GenerationI struct {
 				RedBlue struct {
-					BackDefault      string `json:"back_default,omitempty"`
-					BackGray         string `json:"back_gray,omitempty"`
-					BackTransparent  string `json:"back_transparent,omitempty"`
-					FrontDefault     string `json:"front_default,omitempty"`
-					FrontGray        string `json:"front_gray,omitempty"`
-					FrontTransparent string `json:"front_transparent,omitempty"`
-				} `json:"red-blue,omitempty"`
+					BackDefault      string `json:"back_default"`
+					BackGray         string `json:"back_gray"`
+					BackTransparent  string `json:"back_transparent"`
+					FrontDefault     string `json:"front_default"`
+					FrontGray        string `json:"front_gray"`
+					FrontTransparent string `json:"front_transparent"`
+				} `json:"red-blue"`
 				Yellow struct {
-					BackDefault      string `json:"back_default,omitempty"`
-					BackGray         string `json:"back_gray,omitempty"`
-					BackTransparent  string `json:"back_transparent,omitempty"`
-					FrontDefault     string `json:"front_default,omitempty"`
-					FrontGray        string `json:"front_gray,omitempty"`
-					FrontTransparent string `json:"front_transparent,omitempty"`
-				} `json:"yellow,omitempty"`
-			} `json:"generation-i,omitempty"`
+					BackDefault      string `json:"back_default"`
+					BackGray         string `json:"back_gray"`
+					BackTransparent  string `json:"back_transparent"`
+					FrontDefault     string `json:"front_default"`
+					FrontGray        string `json:"front_gray"`
+					FrontTransparent string `json:"front_transparent"`
+				} `json:"yellow"`
+			} `json:"generation-i"`
 			GenerationIi struct {
 				Crystal struct {
-					BackDefault           string `json:"back_default,omitempty"`
-					BackShiny             string `json:"back_shiny,omitempty"`
-					BackShinyTransparent  string `json:"back_shiny_transparent,omitempty"`
-					BackTransparent       string `json:"back_transparent,omitempty"`
-					FrontDefault          string `json:"front_default,omitempty"`
-					FrontShiny            string `json:"front_shiny,omitempty"`
-					FrontShinyTransparent string `json:"front_shiny_transparent,omitempty"`
-					FrontTransparent      string `json:"front_transparent,omitempty"`
-				} `json:"crystal,omitempty"`
+					BackDefault           string `json:"back_default"`
+					BackShiny             string `json:"back_shiny"`
+					BackShinyTransparent  string `json:"back_shiny_transparent"`
+					BackTransparent       string `json:"back_transparent"`
+					FrontDefault          string `json:"front_default"`
+					FrontShiny            string `json:"front_shiny"`
+					FrontShinyTransparent string `json:"front_shiny_transparent"`
+					FrontTransparent      string `json:"front_transparent"`
+				} `json:"crystal"`
 				Gold struct {
-					BackDefault      string `json:"back_default,omitempty"`
-					BackShiny        string `json:"back_shiny,omitempty"`
-					FrontDefault     string `json:"front_default,omitempty"`
-					FrontShiny       string `json:"front_shiny,omitempty"`
-					FrontTransparent string `json:"front_transparent,omitempty"`
-				} `json:"gold,omitempty"`
+					BackDefault      string `json:"back_default"`
+					BackShiny        string `json:"back_shiny"`
+					FrontDefault     string `json:"front_default"`
+					FrontShiny       string `json:"front_shiny"`
+					FrontTransparent string `json:"front_transparent"`
+				} `json:"gold"`
 				Silver struct {
-					BackDefault      string `json:"back_default,omitempty"`
-					BackShiny        string `json:"back_shiny,omitempty"`
-					FrontDefault     string `json:"front_default,omitempty"`
-					FrontShiny       string `json:"front_shiny,omitempty"`
-					FrontTransparent string `json:"front_transparent,omitempty"`
-				} `json:"silver,omitempty"`
-			} `json:"generation-ii,omitempty"`
+					BackDefault      string `json:"back_default"`
+					BackShiny        string `json:"back_shiny"`
+					FrontDefault     string `json:"front_default"`
+					FrontShiny       string `json:"front_shiny"`
+					FrontTransparent string `json:"front_transparent"`
+				} `json:"silver"`
+			} `json:"generation-ii"`
 			GenerationIii struct {
 				Emerald struct {
-					FrontDefault string `json:"front_default,omitempty"`
-					FrontShiny   string `json:"front_shiny,omitempty"`
-				} `json:"emerald,omitempty"`
+					FrontDefault string `json:"front_default"`
+					FrontShiny   string `json:"front_shiny"`
+				} `json:"emerald"`
 				FireredLeafgreen struct {
-					BackDefault  string `json:"back_default,omitempty"`
-					BackShiny    string `json:"back_shiny,omitempty"`
-					FrontDefault string `json:"front_default,omitempty"`
-					FrontShiny   string `json:"front_shiny,omitempty"`
-				} `json:"firered-leafgreen,omitempty"`
+					BackDefault  string `json:"back_default"`
+					BackShiny    string `json:"back_shiny"`
+					FrontDefault string `json:"front_default"`
+					FrontShiny   string `json:"front_shiny"`
+				} `json:"firered-leafgreen"`
 				RubySapphire struct {
-					BackDefault  string `json:"back_default,omitempty"`
-					BackShiny    string `json:"back_shiny,omitempty"`
-					FrontDefault string `json:"front_default,omitempty"`
-					FrontShiny   string `json:"front_shiny,omitempty"`
-				} `json:"ruby-sapphire,omitempty"`
-			} `json:"generation-iii,omitempty"`
+					BackDefault  string `json:"back_default"`
+					BackShiny    string `json:"back_shiny"`
+					FrontDefault string `json:"front_default"`
+					FrontShiny   string `json:"front_shiny"`
+				} `json:"ruby-sapphire"`
+			} `json:"generation-iii"`
 			GenerationIv struct {
 				DiamondPearl struct {
-					BackDefault      string `json:"back_default,omitempty"`
-					BackFemale       any    `json:"back_female,omitempty"`
-					BackShiny        string `json:"back_shiny,omitempty"`
-					BackShinyFemale  any    `json:"back_shiny_female,omitempty"`
-					FrontDefault     string `json:"front_default,omitempty"`
-					FrontFemale      any    `json:"front_female,omitempty"`
-					FrontShiny       string `json:"front_shiny,omitempty"`
-					FrontShinyFemale any    `json:"front_shiny_female,omitempty"`
-				} `json:"diamond-pearl,omitempty"`
+					BackDefault      string      `json:"back_default"`
+					BackFemale       interface{} `json:"back_female"`
+					BackShiny        string      `json:"back_shiny"`
+					BackShinyFemale  interface{} `json:"back_shiny_female"`
+					FrontDefault     string      `json:"front_default"`
+					FrontFemale      interface{} `json:"front_female"`
+					FrontShiny       string      `json:"front_shiny"`
+					FrontShinyFemale interface{} `json:"front_shiny_female"`
+				} `json:"diamond-pearl"`
 				HeartgoldSoulsilver struct {
-					BackDefault      string `json:"back_default,omitempty"`
-					BackFemale       any    `json:"back_female,omitempty"`
-					BackShiny        string `json:"back_shiny,omitempty"`
-					BackShinyFemale  any    `json:"back_shiny_female,omitempty"`
-					FrontDefault     string `json:"front_default,omitempty"`
-					FrontFemale      any    `json:"front_female,omitempty"`
-					FrontShiny       string `json:"front_shiny,omitempty"`
-					FrontShinyFemale any    `json:"front_shiny_female,omitempty"`
-				} `json:"heartgold-soulsilver,omitempty"`
+					BackDefault      string      `json:"back_default"`
+					BackFemale       interface{} `json:"back_female"`
+					BackShiny        string      `json:"back_shiny"`
+					BackShinyFemale  interface{} `json:"back_shiny_female"`
+					FrontDefault     string      `json:"front_default"`
+					FrontFemale      interface{} `json:"front_female"`
+					FrontShiny       string      `json:"front_shiny"`
+					FrontShinyFemale interface{} `json:"front_shiny_female"`
+				} `json:"heartgold-soulsilver"`
 				Platinum struct {
-					BackDefault      string `json:"back_default,omitempty"`
-					BackFemale       any    `json:"back_female,omitempty"`
-					BackShiny        string `json:"back_shiny,omitempty"`
-					BackShinyFemale  any    `json:"back_shiny_female,omitempty"`
-					FrontDefault     string `json:"front_default,omitempty"`
-					FrontFemale      any    `json:"front_female,omitempty"`
-					FrontShiny       string `json:"front_shiny,omitempty"`
-					FrontShinyFemale any    `json:"front_shiny_female,omitempty"`
-				} `json:"platinum,omitempty"`
-			} `json:"generation-iv,omitempty"`
+					BackDefault      string      `json:"back_default"`
+					BackFemale       interface{} `json:"back_female"`
+					BackShiny        string      `json:"back_shiny"`
+					BackShinyFemale  interface{} `json:"back_shiny_female"`
+					FrontDefault     string      `json:"front_default"`
+					FrontFemale      interface{} `json:"front_female"`
+					FrontShiny       string      `json:"front_shiny"`
+					FrontShinyFemale interface{} `json:"front_shiny_female"`
+				} `json:"platinum"`
+			} `json:"generation-iv"`
 			GenerationV struct {
 				BlackWhite struct {
 					Animated struct {
-						BackDefault      string `json:"back_default,omitempty"`
-						BackFemale       any    `json:"back_female,omitempty"`
-						BackShiny        string `json:"back_shiny,omitempty"`
-						BackShinyFemale  any    `json:"back_shiny_female,omitempty"`
-						FrontDefault     string `json:"front_default,omitempty"`
-						FrontFemale      any    `json:"front_female,omitempty"`
-						FrontShiny       string `json:"front_shiny,omitempty"`
-						FrontShinyFemale any    `json:"front_shiny_female,omitempty"`
-					} `json:"animated,omitempty"`
-					BackDefault      string `json:"back_default,omitempty"`
-					BackFemale       any    `json:"back_female,omitempty"`
-					BackShiny        string `json:"back_shiny,omitempty"`
-					BackShinyFemale  any    `json:"back_shiny_female,omitempty"`
-					FrontDefault     string `json:"front_default,omitempty"`
-					FrontFemale      any    `json:"front_female,omitempty"`
-					FrontShiny       string `json:"front_shiny,omitempty"`
-					FrontShinyFemale any    `json:"front_shiny_female,omitempty"`
-				} `json:"black-white,omitempty"`
-			} `json:"generation-v,omitempty"`
+						BackDefault      string      `json:"back_default"`
+						BackFemale       interface{} `json:"back_female"`
+						BackShiny        string      `json:"back_shiny"`
+						BackShinyFemale  interface{} `json:"back_shiny_female"`
+						FrontDefault     string      `json:"front_default"`
+						FrontFemale      interface{} `json:"front_female"`
+						FrontShiny       string      `json:"front_shiny"`
+						FrontShinyFemale interface{} `json:"front_shiny_female"`
+					} `json:"animated"`
+					BackDefault      string      `json:"back_default"`
+					BackFemale       interface{} `json:"back_female"`
+					BackShiny        string      `json:"back_shiny"`
+					BackShinyFemale  interface{} `json:"back_shiny_female"`
+					FrontDefault     string      `json:"front_default"`
+					FrontFemale      interface{} `json:"front_female"`
+					FrontShiny       string      `json:"front_shiny"`
+					FrontShinyFemale interface{} `json:"front_shiny_female"`
+				} `json:"black-white"`
+			} `json:"generation-v"`
 			GenerationVi struct {
 				OmegarubyAlphasapphire struct {
-					FrontDefault     string `json:"front_default,omitempty"`
-					FrontFemale      any    `json:"front_female,omitempty"`
-					FrontShiny       string `json:"front_shiny,omitempty"`
-					FrontShinyFemale any    `json:"front_shiny_female,omitempty"`
-				} `json:"omegaruby-alphasapphire,omitempty"`
+					FrontDefault     string      `json:"front_default"`
+					FrontFemale      interface{} `json:"front_female"`
+					FrontShiny       string      `json:"front_shiny"`
+					FrontShinyFemale interface{} `json:"front_shiny_female"`
+				} `json:"omegaruby-alphasapphire"`
 				XY struct {
-					FrontDefault     string `json:"front_default,omitempty"`
-					FrontFemale      any    `json:"front_female,omitempty"`
-					FrontShiny       string `json:"front_shiny,omitempty"`
-					FrontShinyFemale any    `json:"front_shiny_female,omitempty"`
-				} `json:"x-y,omitempty"`
-			} `json:"generation-vi,omitempty"`
+					FrontDefault     string      `json:"front_default"`
+					FrontFemale      interface{} `json:"front_female"`
+					FrontShiny       string      `json:"front_shiny"`
+					FrontShinyFemale interface{} `json:"front_shiny_female"`
+				} `json:"x-y"`
+			} `json:"generation-vi"`
 			GenerationVii struct {
 				Icons struct {
-					FrontDefault string `json:"front_default,omitempty"`
-					FrontFemale  any    `json:"front_female,omitempty"`
-				} `json:"icons,omitempty"`
+					FrontDefault string      `json:"front_default"`
+					FrontFemale  interface{} `json:"front_female"`
+				} `json:"icons"`
 				UltraSunUltraMoon struct {
-					FrontDefault     string `json:"front_default,omitempty"`
-					FrontFemale      any    `json:"front_female,omitempty"`
-					FrontShiny       string `json:"front_shiny,omitempty"`
-					FrontShinyFemale any    `json:"front_shiny_female,omitempty"`
-				} `json:"ultra-sun-ultra-moon,omitempty"`
-			} `json:"generation-vii,omitempty"`
+					FrontDefault     string      `json:"front_default"`
+					FrontFemale      interface{} `json:"front_female"`
+					FrontShiny       string      `json:"front_shiny"`
+					FrontShinyFemale interface{} `json:"front_shiny_female"`
+				} `json:"ultra-sun-ultra-moon"`
+			} `json:"generation-vii"`
 			GenerationViii struct {
 				Icons struct {
-					FrontDefault string `json:"front_default,omitempty"`
-					FrontFemale  any    `json:"front_female,omitempty"`
-				} `json:"icons,omitempty"`
-			} `json:"generation-viii,omitempty"`
-		} `json:"versions,omitempty"`
-	} `json:"sprites,omitempty"`
+					FrontDefault string      `json:"front_default"`
+					FrontFemale  interface{} `json:"front_female"`
+				} `json:"icons"`
+			} `json:"generation-viii"`
+		} `json:"versions"`
+	} `json:"sprites"`
 	Stats []struct {
-		BaseStat int `json:"base_stat,omitempty"`
-		Effort   int `json:"effort,omitempty"`
+		BaseStat int `json:"base_stat"`
+		Effort   int `json:"effort"`
 		Stat     struct {
-			Name string `json:"name,omitempty"`
-			URL  string `json:"url,omitempty"`
-		} `json:"stat,omitempty"`
-	} `json:"stats,omitempty"`
+			Name string `json:"name"`
+			URL  string `json:"url"`
+		} `json:"stat"`
+	} `json:"stats"`
 	Types []struct {
-		Slot int `json:"slot,omitempty"`
+		Slot int `json:"slot"`
 		Type struct {
-			Name string `json:"name,omitempty"`
-			URL  string `json:"url,omitempty"`
-		} `json:"type,omitempty"`
-	} `json:"types,omitempty"`
-	Weight int `json:"weight,omitempty"`
+			Name string `json:"name"`
+			URL  string `json:"url"`
+		} `json:"type"`
+	} `json:"types"`
+	Weight int `json:"weight"`
 }

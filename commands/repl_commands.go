@@ -5,7 +5,6 @@ import (
 	"log"
 	"math/rand"
 	"pokedox/config"
-	"pokedox/internal/pokeapi"
 	"time"
 )
 
@@ -74,11 +73,7 @@ func getRandomBinary(difficulty int) int {
 
 	// Generate a random float between 0 and 1
 	randomValue := rand.Float64()
-
-	// Calculate the threshold based on difficulty
-	// Higher difficulty means a higher probability of returning 0
-	// Assuming difficulty ranges from 1 to 10
-	threshold := float64(difficulty) / 100.0
+	threshold := (0.4 + float64(difficulty)) / 100.0
 
 	if randomValue < threshold {
 		return 0
@@ -94,26 +89,20 @@ func CommandCatch(cfg *config.Config, parameters ...string) error {
 
 	pokemoneName := parameters[0]
 
-	resp, err := cfg.PokeapiClient.CatchPokemone(pokemoneName)
+	pokemon, err := cfg.PokeapiClient.CatchPokemone(pokemoneName)
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("Catching %s\n", resp.Name)
-	pokedox := map[string]pokeapi.Pokemon{}
-	if _, ok := pokedox[resp.Name]; ok {
-		fmt.Printf("%s already in Pokedox \n", resp.Name)
-		return nil
-	}
-	res := getRandomBinary(resp.BaseExperience)
+	fmt.Printf("Catching %s\n", pokemon.Name)
+
+	res := getRandomBinary(pokemon.BaseExperience)
 	if res == 1 {
-		fmt.Printf("%s Caught\n", resp.Name)
-		pokedox[resp.Name] = pokeapi.Pokemon{
-			Name:  resp.Name,
-			Infos: resp,
-		}
+		fmt.Printf("%s Caught\n", pokemon.Name)
+		cfg.CaughtPokemon[pokemon.Name] = pokemon
+
 		return nil
 	} else {
-		fmt.Printf("Oups, couln't catch %s\n", resp.Name)
+		fmt.Printf("Oups, couln't catch %s\n", pokemon.Name)
 		return nil
 	}
 }
