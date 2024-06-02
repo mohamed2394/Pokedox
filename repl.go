@@ -15,6 +15,10 @@ type cliCommand struct {
 	callback    func(cfg *config.Config, parameter ...string) error
 }
 
+func printPrompt() {
+	fmt.Print("pokedox", "> ")
+}
+
 var commands_e = map[string]cliCommand{
 	"help": {
 		name:        "help",
@@ -33,8 +37,13 @@ var commands_e = map[string]cliCommand{
 	},
 	"explore": {
 		name:        "explore",
-		description: "displays the names of 20 location areas in the Pokemon world",
+		description: "explore the are for pokemones",
 		callback:    commands.CommandExplore,
+	},
+	"catch": {
+		name:        "catch",
+		description: "catch a pokemone",
+		callback:    commands.CommandCatch,
 	},
 
 	"map": {

@@ -40,7 +40,7 @@ type Names struct {
 	Name     string   `json:"name"`
 }
 
-type Pokemon struct {
+type Pokemone struct {
 	Name string `json:"name"`
 	URL  string `json:"url"`
 }
@@ -65,6 +65,6 @@ type VersionDetails struct {
 }
 
 type PokemonEncounters struct {
-	Pokemon        Pokemon          `json:"pokemon"`
+	Pokemon        Pokemone         `json:"pokemon"`
 	VersionDetails []VersionDetails `json:"version_details"`
 }
