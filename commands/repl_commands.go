@@ -93,11 +93,13 @@ func CommandCatch(cfg *config.Config, parameters ...string) error {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("Catching %s\n", pokemon.Name)
+	fmt.Printf("Throwing a Pokeball at %s..\n", pokemon.Name)
 
 	res := getRandomBinary(pokemon.BaseExperience)
 	if res == 1 {
 		fmt.Printf("%s Caught\n", pokemon.Name)
+		fmt.Printf("You may now inspect it with the inspect command.\n")
+
 		cfg.CaughtPokemon[pokemon.Name] = pokemon
 
 		return nil
@@ -105,4 +107,45 @@ func CommandCatch(cfg *config.Config, parameters ...string) error {
 		fmt.Printf("Oups, couln't catch %s\n", pokemon.Name)
 		return nil
 	}
+}
+
+func CommandInspect(cfg *config.Config, parameters ...string) error {
+	if len(parameters) != 1 {
+		return fmt.Errorf("specify the pokemone you want to inspect")
+	}
+
+	pokemoneName := parameters[0]
+
+	pokemon, ok := cfg.CaughtPokemon[pokemoneName]
+	if !ok {
+		fmt.Printf("You haven't caught %s yet \n", pokemoneName)
+		return nil
+	}
+
+	fmt.Printf("Inspecting %s\n", pokemon.Name)
+
+	fmt.Printf("Name : %s\n", pokemon.Name)
+	fmt.Printf("Height : %d\n", pokemon.Height)
+	fmt.Printf("Weight : %d\n", pokemon.Weight)
+	fmt.Printf("Stats : \n")
+	for _, elem := range pokemon.Stats {
+		fmt.Printf("  -%s : %d \n", elem.Stat.Name, elem.BaseStat)
+	}
+	fmt.Printf("Types : \n")
+	for _, elem := range pokemon.Types {
+		fmt.Printf("  -%s \n", elem.Type.Name)
+	}
+	return nil
+}
+
+func CommandPokedox(cfg *config.Config, parameters ...string) error {
+	if len(cfg.CaughtPokemon) == 0 {
+		fmt.Printf("Your Pokedex is empty, catch pokemons using the catch command  \n")
+		return nil
+	}
+	fmt.Printf("Your Pokedex:  \n")
+	for k := range cfg.CaughtPokemon {
+		fmt.Printf("  - %s \n", k)
+	}
+	return nil
 }

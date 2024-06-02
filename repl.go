@@ -45,6 +45,16 @@ var commands_e = map[string]cliCommand{
 		description: "catch a pokemone",
 		callback:    commands.CommandCatch,
 	},
+	"inspect": {
+		name:        "inspect",
+		description: "inspect a pokemone in hand",
+		callback:    commands.CommandInspect,
+	},
+	"pokedox": {
+		name:        "pokedox",
+		description: "display the caught pokemons in the pokedox",
+		callback:    commands.CommandPokedox,
+	},
 
 	"map": {
 		name:        "map",
